@@ -1,7 +1,9 @@
 package com.cresen.locale.model.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -38,4 +40,13 @@ public class Language {
     @Column(name = "update_date")
     @LastModifiedDate
     private Timestamp modifiedDate;
+
+
+    @Column(name = "created_by")
+    @CreatedBy
+    private String createdBy;
+
+    @Column(name = "updated_by")
+    @LastModifiedBy
+    private String modifiedBy;
 }

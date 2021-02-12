@@ -1,16 +1,6 @@
 # https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 
 # ====================================
-# HCP/HCO ATTRIBUTES PROPERTIES
-# ====================================
-
-server:
-  servlet:
-    context-path: /locale-services
-
-
-
-# ====================================
 # Spring PROPERTIES
 # ====================================
 

@@ -29,6 +29,6 @@ public interface LocaleTranslationService {
     void deleteLocaleTranslationById(Long id);
 
     void deleteLocaleTranslationByIds(Set<Long> ids);
-
+    List<LocaleTranslationVO> getAllLocaleTranslationByUniqueCode(String uniqueKey);
 
 }

@@ -12,5 +12,7 @@ public interface LanguageService {
 
     List<LanguageVO> findAllLanguage();
 
-    List<LanguageVO> findAllActiveLanguage();
+    List<LanguageVO> findAllLanguageByEnabled(Boolean enabled);
+
+    List<LanguageVO> findAllLanguage(Boolean isActive);
 }

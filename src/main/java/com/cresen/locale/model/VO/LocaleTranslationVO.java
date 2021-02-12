@@ -2,6 +2,7 @@ package com.cresen.locale.model.VO;
 
 import com.cresen.locale.model.entity.LocaleTranslation;
 import lombok.Data;
+import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
 
 import java.sql.Timestamp;
@@ -30,9 +31,13 @@ public class LocaleTranslationVO {
 
 
     private Timestamp modifiedDate;
+    private String lastModifiedBy;
+    private String loggedInUser;
 
     public static LocaleTranslationVO make(LocaleTranslation localeTranslation) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(localeTranslation, LocaleTranslationVO.class);
+        LocaleTranslationVO localeTranslationVO = modelMapper.map(localeTranslation, LocaleTranslationVO.class);
+        localeTranslationVO.setLastModifiedBy(StringUtils.isEmpty(localeTranslation.getModifiedBy()) ? localeTranslation.getCreatedBy() : localeTranslation.getModifiedBy());
+        return localeTranslationVO;
     }
 }

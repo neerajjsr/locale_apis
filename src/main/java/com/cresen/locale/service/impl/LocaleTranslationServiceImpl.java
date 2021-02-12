@@ -10,6 +10,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +31,8 @@ public class LocaleTranslationServiceImpl implements LocaleTranslationService {
     @Override
     public LocaleTranslationVO addNewLocaleTranslation(LocaleTranslationVO localeTranslationVO) {
         LocaleTranslation localeTranslation = LocaleTranslation.make(localeTranslationVO);
+        localeTranslation.setCreatedBy(localeTranslationVO.getLoggedInUser());
+        localeTranslation.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         localeTranslation = localeTranslationDataProvider.createNewLocale(localeTranslation);
         if (localeTranslation != null)
             localeTranslationVO = LocaleTranslationVO.make(localeTranslationDataProvider.createNewLocale(localeTranslation));
@@ -45,6 +49,8 @@ public class LocaleTranslationServiceImpl implements LocaleTranslationService {
         LocaleTranslation dbLocaleTranslation = localeTranslationDataProvider.findById(localeTranslationVO.getId());
         dbLocaleTranslation.setDisplayLabel(localeTranslationVO.getDisplayLabel());
         dbLocaleTranslation.setUniqueCode(localeTranslationVO.getUniqueCode());
+        dbLocaleTranslation.setModifiedBy(localeTranslationVO.getLoggedInUser());
+        dbLocaleTranslation.setModifiedDate(new Timestamp(System.currentTimeMillis()));
         dbLocaleTranslation = localeTranslationDataProvider.saveLocaleTranslation(dbLocaleTranslation);
         localeTranslationVO = LocaleTranslationVO.make(dbLocaleTranslation);
         return localeTranslationVO;
@@ -69,7 +75,10 @@ public class LocaleTranslationServiceImpl implements LocaleTranslationService {
 
     @Override
     public List<LocaleTranslationVO> getAllLocaleTranslation() {
-        return null;
+        List<LocaleTranslationVO> localeTranslationVOList=new ArrayList<>();
+        List<LocaleTranslation> localeTranslationList = localeTranslationDataProvider.findAll();
+        localeTranslationList.forEach(localeTranslation -> localeTranslationVOList.add(LocaleTranslationVO.make(localeTranslation)));
+        return localeTranslationVOList;
     }
 
     @Override
@@ -85,5 +94,13 @@ public class LocaleTranslationServiceImpl implements LocaleTranslationService {
     @Override
     public void deleteLocaleTranslationByIds(Set<Long> ids) {
 
+    }
+
+    @Override
+    public List<LocaleTranslationVO> getAllLocaleTranslationByUniqueCode(String uniqueKey) {
+        List<LocaleTranslationVO> localeTranslationVOList=new ArrayList<>();
+        List<LocaleTranslation> localeTranslationList = localeTranslationDataProvider.findAllByUniqueCde(uniqueKey);
+        localeTranslationList.forEach(localeTranslation -> localeTranslationVOList.add(LocaleTranslationVO.make(localeTranslation)));
+        return localeTranslationVOList;
     }
 }

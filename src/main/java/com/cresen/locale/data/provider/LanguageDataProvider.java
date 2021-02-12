@@ -2,6 +2,7 @@ package com.cresen.locale.data.provider;
 
 import com.cresen.locale.data.repository.LanguageRepository;
 import com.cresen.locale.model.entity.Language;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,12 @@ public class LanguageDataProvider {
         return languageRepository.findAll();
     }
 
-    public List<Language> findAllActiveLanguage() {
-        return languageRepository.findByEnabled(true);
+    public List<Language> findAllByEnabled(Boolean enabled) {
+        return languageRepository.findByEnabled(enabled);
     }
 
     public Language findByLanguageCode(String languageCode) {
-        return languageRepository.findByLanguageCode(languageCode).orElse(null);
+        return languageRepository.findByLanguageCodeIgnoreCase(languageCode).orElse(null);
     }
 
 }
