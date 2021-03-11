@@ -1,62 +1,5 @@
-# https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-
-# ====================================
-# Spring PROPERTIES
-# ====================================
 
 spring:
-  application:
-    name: locale-services-api
-
-  main:
-    allow-bean-definition-overriding: true
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: none
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: false
-    properties:
-      hibernate:
-        default_schema: "locale"
-        format_sql: true
-        dialect: com.cresen.locale.config.CustomDialectConfig
-        temp.use_jdbc_metadata_defaults: false
-        order_inserts: true
-        order_updates: true
-        jdbc:
-          lob.non_contextual_creation: true
-          batch_size: 20
-          fetch_size: 20
-          batch_versioned_data: true
-
-# ====================================
-
-# ====================================
-# LOGGING PROPERTIES
-# ====================================
-logging:
-  level:
-    jdbc:
-      sqlonly: info
-      resultsettable: info
-      sqltiming: fatal
-      audit: fatal
-      resultset: fatal
-      connection: info
-
-    org:
-      springframework.orm.jpa: ERROR
-      hibernate.jdbc: ERROR
-
-    com.zaxxer.hikari.HikariConfig: ERROR
-
-
----
-
-spring:
-  profiles: local
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/hcpcontracting_dev
@@ -75,16 +18,3 @@ eureka:
       defaultZone: http://localhost:9001/eureka
   instance:
     preferIpAddress: true
-
----
-
-spring:
-  profiles: prod
-
----
-
-spring:
-  profiles: dev
-
----
-

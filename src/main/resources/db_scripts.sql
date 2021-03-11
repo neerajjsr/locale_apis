@@ -42,5 +42,12 @@ INSERT INTO locale.language_details(
 	(1, 'placeholder.uniqueCode', 'Unique Key','neerajjsr'),
 	(1, 'placeholder.displayLabel', 'Display Label','neerajjsr');
 	
-	
-	
+	INSERT INTO locale.language_details(
+    	language_id, unique_code, display_label,created_by)
+	VALUES (1, 'typeUserName', 'Type User Name','neerajjsr'),
+	(1, 'userFullName', 'User Full Name','neerajjsr'),
+	(1, 'typeEmailId', 'Type Email Id','neerajjsr'),
+	(1, 'role', 'Role','neerajjsr'),
+	(1, 'subRole', 'Sub Role','neerajjsr'),
+	(1, 'user', 'User','neerajjsr'),
+	(1, 'userAssignments', 'User Assignments','neerajjsr');
