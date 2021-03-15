@@ -6,6 +6,7 @@ import com.cresen.locale.model.entity.Language;
 import com.cresen.locale.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +32,20 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public List<LanguageVO> findAllActiveLanguage() {
-        List<Language> languageList = languageDataProvider.findAllActiveLanguage();
+    public List<LanguageVO> findAllLanguageByEnabled(Boolean enabled) {
+        List<Language> languageList = languageDataProvider.findAllByEnabled(enabled);
         List<LanguageVO> languageVOList = new ArrayList<>();
         languageList.forEach(language -> {
             languageVOList.add(LanguageVO.make(language));
         });
         return languageVOList;
+    }
+
+    @Override
+    public List<LanguageVO> findAllLanguage(Boolean isActive) {
+        if (ObjectUtils.isEmpty(isActive)) {
+            return findAllLanguage();
+        } else return findAllLanguageByEnabled(isActive);
+
     }
 }

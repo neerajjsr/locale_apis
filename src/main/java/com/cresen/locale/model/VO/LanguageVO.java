@@ -2,6 +2,7 @@ package com.cresen.locale.model.VO;
 
 import com.cresen.locale.model.entity.Language;
 import lombok.Data;
+import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -33,11 +34,16 @@ public class LanguageVO {
 
     private Timestamp createdDate;
 
+
     private Timestamp modifiedDate;
+    private String lastModifiedBy;
+    private String loggedInUser;
 
 
     public static LanguageVO make(Language language) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(language, LanguageVO.class);
+        LanguageVO languageVO = modelMapper.map(language, LanguageVO.class);
+        languageVO.setLastModifiedBy(StringUtils.isEmpty(language.getModifiedBy()) ? language.getCreatedBy() : language.getModifiedBy());
+        return languageVO;
     }
 }

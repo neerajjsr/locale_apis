@@ -12,11 +12,11 @@ import java.util.Set;
  */
 public interface LocaleTranslationService {
 
-    LocaleTranslationVO addNewLocaleTranslation(LocaleTranslationVO localeTranslationVO);
+    LocaleTranslationVO addNewLocaleTranslation(LocaleTranslationVO localeTranslationVO,String loggedInUser);
 
     void addNewLocaleTranslations(List<LocaleTranslationVO> localeTranslationVOList);
 
-    LocaleTranslationVO modifyLocalTranslation(LocaleTranslationVO localeTranslationVO);
+    LocaleTranslationVO modifyLocalTranslation(LocaleTranslationVO localeTranslationVO,String loggedInUser);
 
     void modifyLocalTranslations(List<LocaleTranslationVO> localeTranslationVOList);
 
@@ -29,6 +29,6 @@ public interface LocaleTranslationService {
     void deleteLocaleTranslationById(Long id);
 
     void deleteLocaleTranslationByIds(Set<Long> ids);
-
+    List<LocaleTranslationVO> getAllLocaleTranslationByUniqueCode(String uniqueKey);
 
 }

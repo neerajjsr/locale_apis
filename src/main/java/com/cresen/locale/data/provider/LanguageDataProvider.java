@@ -22,12 +22,12 @@ public class LanguageDataProvider {
         return languageRepository.findAll();
     }
 
-    public List<Language> findAllActiveLanguage() {
-        return languageRepository.findByEnabled(true);
+    public List<Language> findAllByEnabled(Boolean enabled) {
+        return languageRepository.findByEnabled(enabled);
     }
 
     public Language findByLanguageCode(String languageCode) {
-        return languageRepository.findByLanguageCode(languageCode).orElse(null);
+        return languageRepository.findByLanguageCodeIgnoreCase(languageCode).orElse(null);
     }
 
 }
