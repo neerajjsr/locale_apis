@@ -29,9 +29,9 @@ public class LocaleTranslationServiceImpl implements LocaleTranslationService {
     LanguageDataProvider languageDataProvider;
 
     @Override
-    public LocaleTranslationVO addNewLocaleTranslation(LocaleTranslationVO localeTranslationVO) {
+    public LocaleTranslationVO addNewLocaleTranslation(LocaleTranslationVO localeTranslationVO,String loggedInUser) {
         LocaleTranslation localeTranslation = LocaleTranslation.make(localeTranslationVO);
-        localeTranslation.setCreatedBy(localeTranslationVO.getLoggedInUser());
+        localeTranslation.setCreatedBy(loggedInUser);
         localeTranslation.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         localeTranslation = localeTranslationDataProvider.createNewLocale(localeTranslation);
         if (localeTranslation != null)
@@ -45,11 +45,11 @@ public class LocaleTranslationServiceImpl implements LocaleTranslationService {
     }
 
     @Override
-    public LocaleTranslationVO modifyLocalTranslation(LocaleTranslationVO localeTranslationVO) {
+    public LocaleTranslationVO modifyLocalTranslation(LocaleTranslationVO localeTranslationVO,String loggedInUser) {
         LocaleTranslation dbLocaleTranslation = localeTranslationDataProvider.findById(localeTranslationVO.getId());
         dbLocaleTranslation.setDisplayLabel(localeTranslationVO.getDisplayLabel());
         dbLocaleTranslation.setUniqueCode(localeTranslationVO.getUniqueCode());
-        dbLocaleTranslation.setModifiedBy(localeTranslationVO.getLoggedInUser());
+        dbLocaleTranslation.setModifiedBy(loggedInUser);
         dbLocaleTranslation.setModifiedDate(new Timestamp(System.currentTimeMillis()));
         dbLocaleTranslation = localeTranslationDataProvider.saveLocaleTranslation(dbLocaleTranslation);
         localeTranslationVO = LocaleTranslationVO.make(dbLocaleTranslation);

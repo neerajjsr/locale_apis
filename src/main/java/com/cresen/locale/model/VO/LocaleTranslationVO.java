@@ -32,7 +32,7 @@ public class LocaleTranslationVO {
 
     private Timestamp modifiedDate;
     private String lastModifiedBy;
-    private String loggedInUser;
+
 
     public static LocaleTranslationVO make(LocaleTranslation localeTranslation) {
         ModelMapper modelMapper = new ModelMapper();
