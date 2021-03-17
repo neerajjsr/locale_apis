@@ -51,3 +51,9 @@ INSERT INTO locale.language_details(
 	(1, 'subRole', 'Sub Role','neerajjsr'),
 	(1, 'user', 'User','neerajjsr'),
 	(1, 'userAssignments', 'User Assignments','neerajjsr');
+
+INSERT INTO locale.language_details(
+    	language_id, unique_code, display_label,created_by)
+	VALUES  (1, 'departmentName', 'Department Name','neerajjsr'),
+	(1, 'departmentDesc', 'Department Description','neerajjsr'),
+	(1, 'crossBorder', 'Cross Border','neerajjsr');
